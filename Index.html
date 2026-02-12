@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MissionJEET | The Honest Revolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-red: #FF0000; /* Exact Red from MissionJEET Logo */
+            --bg-black: #000000;
+            --bg-charcoal: #0D1117;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glow-shadow: rgba(255, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Ambient Background Glows --- */
+        .glow-sphere {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: -1px;
+        }
+
+        .logo-box {
+            background: var(--brand-red);
+            padding: 0 8px;
+            border-radius: 4px;
+            margin-left: 2px;
+            display: inline-block;
+        }
+
+        .nav-links a {
+            color: #b1b1b1;
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--brand-red); text-shadow: 0 0 10px var(--brand-red); }
+
+        .btn-premium {
+            background: transparent;
+            border: 1px solid var(--brand-red);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.4s;
+            box-shadow: inset 0 0 0 0 var(--brand-red);
+        }
+
+        .btn-premium:hover {
+            box-shadow: inset 0 0 20px 0 var(--brand-red), 0 0 15px var(--glow-shadow);
+            background: var(--brand-red);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            position: relative;
+        }
+
+        .hero-content { flex: 1; z-index: 2; }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .red-accent { color: var(--brand-red); }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #888;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            border-left: 3px solid var(--brand-red);
+            padding-left: 20px;
+        }
+
+        /* --- The Drona Section --- */
+        .batches { padding: 100px 8%; background: var(--bg-black); }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+
+        .drona-card {
+            background: var(--bg-charcoal);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .drona-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 0, 0, 0.15), transparent);
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .drona-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--brand-red);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.1);
+        }
+
+        .drona-card:hover::before { opacity: 1; }
+
+        .drona-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--brand-red);
+            margin-bottom: 15px;
+        }
+
+        .drona-card p { color: #b1b1b1; margin-bottom: 25px; }
+
+        /* --- Content Highlights (from source) --- */
+        .about-mission {
+            background: var(--bg-charcoal);
+            margin: 0 8% 100px 8%;
+            padding: 60px;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .about-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            list-style: none;
+        }
+
+        .about-list li {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            border-left: 2px solid var(--brand-red);
+        }
+
+        /* --- Ticker --- */
+        .ticker {
+            background: var(--brand-red);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: slide 25s linear infinite;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        @keyframes slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            nav { padding: 0 5%; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-sphere" style="top: -100px; right: -100px;"></div>
+    <div class="glow-sphere" style="bottom: -200px; left: -100px;"></div>
+
+    <nav>
+        <div class="logo-text">MISSION<span class="logo-box">JEET</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#batches">Batches</a>
+            <a href="#contact">Suggestions</a>
+        </div>
+        <button class="btn-premium">LOGIN / SIGNUP</button>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>MISSION (JEE + NEET) <br>= <span class="red-accent">MISSIONJEET</span></h1>
+            <p>
+                A mission to bring honesty and quality back into the ecosystem. 
+                No rank purchasing, no fake promises—only high-quality academic content.
+            </p>
+            <div style="display: flex; gap: 20px;">
+                <button class="btn-premium" style="background: var(--brand-red); padding: 15px 40px;">Explore Batches</button>
+                <button class="btn-premium" style="padding: 15px 40px;">Our Vision</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-mission" id="about">
+        <h2 class="section-title">The <span class="red-accent">Honesty</span> Pledge</h2>
+        <ul class="about-list">
+            <li>No "Star Batch" systems—equality for every aspirant.</li>
+            <li>Content delivered by highly qualified domain experts.</li>
+            <li>Curated study material and absolute concept clarity.</li>
+            <li>"Kisi Bacche Ka Nuksaan Nahi Hone Dena".</li>
+        </ul>
+    </section>
+
+    <section class="batches" id="batches">
+        <h2 class="section-title">Professional <span class="red-accent">Drona</span> Programs</h2>
+        <div class="grid">
+            <div class="drona-card">
+                <h3>DRONA JEE</h3>
+                <p>A year-long batch engineered to maximize performance for serious JEE aspirants.</p>
+                <button class="btn-premium">View Schedule</button>
+            </div>
+            <div class="drona-card">
+                <h3>DRONA NEET</h3>
+                <p>Structured mentorship and precise preparation for focused NEET medical aspirants.</p>
+                <button class="btn-premium">View Schedule</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            &nbsp; • REAL MENTORSHIP • QUALITY CONTENT • NO FAKE PROMISES • ADMISSIONS OPEN 2026 • REAL MENTORSHIP • QUALITY CONTENT • NO FAKE PROMISES • ADMISSIONS OPEN 2026
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 60px; color: #444; font-size: 0.9rem; border-top: 1px solid var(--glass-border);">
+        &copy; 2026 MISSIONJEET. Engineered for Excellence.
+    </footer>
+
+</body>
+</html>
